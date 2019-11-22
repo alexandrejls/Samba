@@ -138,7 +138,8 @@ echo -e "Promovendo o SAMBA4 , aguarde..."
 	# opção do comando samba-tool: domain (), provision ()
 	systemctl stop smbd.service &>> $LOG
 	mv -v /etc/samba/smb.conf /etc/samba/smb.conf.old &>> $LOG
-	systemctl disable smbd.service  &>> $LOG
+	cp smb.conf /etc/samba/smb.conf &>> $LOG
+	systemctl start smbd.service  &>> $LOG
 echo -e "Controlador de Domínio SAMBA4 promivido com sucesso!!!, continuando com o script..."
 sleep 5
 echo
@@ -157,6 +158,8 @@ echo -e "Instalação do SAMBA4 feita com Sucesso!!!, recomendado reinicializar 
 echo -e "Pressione <Enter> para concluir o processo."
 # opção do comando date: + (format), %d (day), %m (month), %Y (year 1970), %H (hour 24), %M (minute 60)
 echo -e "Fim do script $0 em: `date +%d/%m/%Y-"("%H:%M")"`\n" &>> $LOG
+echo -e " Permissão para pastas chmod -R o+rwx /pasta"
+echo -e "adduser user / smbpasswd -a user"
 read
 exit 1
 © 2019 GitHub, Inc.
